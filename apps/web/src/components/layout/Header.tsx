@@ -61,7 +61,7 @@ export function Header() {
               aria-label="Academia Dungeon — início"
               className="focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-focus"
             >
-              <Logo wordmarkClassName="max-[419px]:hidden" />
+              <Logo wordmarkClassName="translate-y-1 max-[419px]:hidden" />
             </Link>
 
             <nav aria-label="Navegação principal" className="hidden lg:block">
