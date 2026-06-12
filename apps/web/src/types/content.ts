@@ -3,7 +3,7 @@
  *
  * Estas interfaces espelham a modelagem futura do backoffice/Supabase
  * (tabelas: profiles, posts, materials, material_categories, news,
- * courses, newsletter_subscribers, community_waitlist, rpg_tables,
+ * courses, participation_requests, community_waitlist, rpg_tables,
  * assets). Os dados mockados em `src/data` implementam estes contratos;
  * quando o CMS entrar, apenas a origem muda — os componentes não.
  */
@@ -60,7 +60,7 @@ export type MaterialCategorySlug =
   | "worldbuilding"
   | "narrativa"
   | "ferramentas"
-  | "old-school";
+  | "dicas-de-sistemas";
 
 export type MaterialDifficulty = "iniciante" | "intermediario" | "veterano";
 

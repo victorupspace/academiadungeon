@@ -185,8 +185,8 @@ export default function NoticiasPage() {
                 A redação continua mapeando sinais úteis para quem mestra.
               </h2>
               <p className="mt-2 max-w-2xl text-sm/6 text-text-secondary">
-                A newsletter reúne novas crônicas, materiais e avisos importantes da Academia em
-                um só envio.
+                Faça parte da conversa e diga quais temas, sistemas e materiais você quer ver na
+                Academia.
               </p>
             </div>
           </Reveal>

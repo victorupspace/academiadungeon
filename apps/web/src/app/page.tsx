@@ -22,7 +22,7 @@ const MARQUEE_ITEMS = [
   "D&D",
   "DCC",
   "Pathfinder",
-  "Old School",
+  "Dicas de Sistemas",
   "Comunidade em construção",
 ];
 

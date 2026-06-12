@@ -5,18 +5,17 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CheckSquare, TriangleAlert } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { subscribeToNewsletter } from "@/lib/actions/newsletter";
-import { newsletterSchema, type NewsletterInput } from "@/lib/validation";
+import { participationSchema, type ParticipationInput } from "@/lib/validation";
 import { cn } from "@/lib/utils";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
 
+const WHATSAPP_NUMBER = "5511970557813";
 const labelClasses = "font-mono text-2xs font-bold uppercase tracking-[0.14em] text-text-secondary";
 
 /**
- * Captura de e-mail (design.md §16): estados idle → loading → success |
- * error, validação Zod inline, honeypot anti-bot e aria-live para
- * leitores de tela. Persistência futura: Supabase via server action.
+ * Formulário de contato: validação Zod inline, honeypot anti-bot e
+ * envio por WhatsApp com mensagem pré-preenchida.
  */
 export function NewsletterForm({ className }: { className?: string }) {
   const [status, setStatus] = useState<FormStatus>("idle");
@@ -25,16 +24,23 @@ export function NewsletterForm({ className }: { className?: string }) {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<NewsletterInput>({
-    resolver: zodResolver(newsletterSchema),
-    defaultValues: { name: "", email: "", guild: "" },
+  } = useForm<ParticipationInput>({
+    resolver: zodResolver(participationSchema),
+    defaultValues: { reason: "", guild: "" },
   });
 
-  const onSubmit = handleSubmit(async (data) => {
+  const onSubmit = handleSubmit((data) => {
     setStatus("loading");
     try {
-      const result = await subscribeToNewsletter(data);
-      setStatus(result.ok ? "success" : "error");
+      if (data.guild) {
+        setStatus("success");
+        return;
+      }
+
+      const text = `Olá! Quero fazer parte da Academia Dungeon.\n\n${data.reason}`;
+      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+      window.open(url, "_blank", "noopener,noreferrer");
+      setStatus("success");
     } catch {
       setStatus("error");
     }
@@ -51,11 +57,11 @@ export function NewsletterForm({ className }: { className?: string }) {
       >
         <CheckSquare className="size-6 text-neon-green" aria-hidden="true" />
         <p className="font-mono text-sm font-bold uppercase tracking-[0.08em] text-text-primary">
-          Acesso concedido. O portão abriu.
+          Mensagem pronta no WhatsApp.
         </p>
         <p className="text-sm/6 text-text-secondary">
-          Você entrou para a Academia. O primeiro grimório chega à sua caixa de entrada em breve —
-          confira também o spam, às vezes os corvos se perdem.
+          A conversa foi aberta com sua mensagem preenchida. Revise e envie quando estiver tudo
+          certo.
         </p>
       </div>
     );
@@ -65,9 +71,9 @@ export function NewsletterForm({ className }: { className?: string }) {
     <form onSubmit={onSubmit} noValidate className={cn("flex flex-col gap-4", className)}>
       {/* honeypot — invisível para humanos, irresistível para bots */}
       <div className="sr-only" aria-hidden="true">
-        <label htmlFor="newsletter-guild">Não preencha este campo</label>
+        <label htmlFor="participation-guild">Não preencha este campo</label>
         <input
-          id="newsletter-guild"
+          id="participation-guild"
           type="text"
           tabIndex={-1}
           autoComplete="off"
@@ -76,53 +82,26 @@ export function NewsletterForm({ className }: { className?: string }) {
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="newsletter-name" className={labelClasses}>
-          Nome
+        <label htmlFor="participation-reason" className={labelClasses}>
+          Pq você quer fazer parte
         </label>
-        <input
-          id="newsletter-name"
-          type="text"
-          autoComplete="name"
-          placeholder="Como te chamam na mesa"
+        <textarea
+          id="participation-reason"
+          rows={7}
+          placeholder="Conte em poucas linhas como a Academia Dungeon pode te ajudar."
           disabled={status === "loading"}
-          aria-invalid={errors.name ? "true" : undefined}
-          aria-describedby={errors.name ? "newsletter-name-error" : undefined}
-          className="field-input"
-          {...register("name")}
+          aria-invalid={errors.reason ? "true" : undefined}
+          aria-describedby={errors.reason ? "participation-reason-error" : undefined}
+          className="field-input min-h-44 resize-y py-3"
+          {...register("reason")}
         />
-        {errors.name && (
+        {errors.reason && (
           <p
-            id="newsletter-name-error"
+            id="participation-reason-error"
             className="font-mono text-2xs uppercase tracking-[0.06em] text-neon-red"
             role="alert"
           >
-            {errors.name.message}
-          </p>
-        )}
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <label htmlFor="newsletter-email" className={labelClasses}>
-          E-mail
-        </label>
-        <input
-          id="newsletter-email"
-          type="email"
-          autoComplete="email"
-          placeholder="voce@taverna.com"
-          disabled={status === "loading"}
-          aria-invalid={errors.email ? "true" : undefined}
-          aria-describedby={errors.email ? "newsletter-email-error" : undefined}
-          className="field-input"
-          {...register("email")}
-        />
-        {errors.email && (
-          <p
-            id="newsletter-email-error"
-            className="font-mono text-2xs uppercase tracking-[0.06em] text-neon-red"
-            role="alert"
-          >
-            {errors.email.message}
+            {errors.reason.message}
           </p>
         )}
       </div>
@@ -131,16 +110,16 @@ export function NewsletterForm({ className }: { className?: string }) {
         {status === "error" && (
           <p className="mb-3 flex items-start gap-2 border border-neon-red/40 bg-neon-red/8 px-3.5 py-2.5 font-mono text-2xs/4 uppercase tracking-[0.04em] text-neon-red">
             <TriangleAlert className="mt-px size-3.5 shrink-0" aria-hidden="true" />
-            O ritual falhou. Verifique sua conexão e tente de novo.
+            Não conseguimos abrir o WhatsApp. Tente novamente.
           </p>
         )}
         <Button type="submit" size="lg" loading={status === "loading"} className="w-full">
-          {status === "loading" ? "Abrindo o portão…" : "Entrar para a Academia"}
+          {status === "loading" ? "Abrindo WhatsApp..." : "Enviar mensagem"}
         </Button>
       </div>
 
       <p className="font-mono text-2xs/4 uppercase tracking-[0.04em] text-text-muted">
-        Sem spam, sem maldições. Cancele com um clique.
+        A mensagem abre no WhatsApp e fica pronta para você enviar.
       </p>
     </form>
   );

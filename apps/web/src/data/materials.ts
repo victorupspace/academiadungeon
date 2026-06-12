@@ -19,7 +19,7 @@ export const materialCategories: MaterialCategory[] = [
   { slug: "worldbuilding", label: "Worldbuilding", tone: "purple" },
   { slug: "narrativa", label: "Narrativa", tone: "red" },
   { slug: "ferramentas", label: "Ferramentas", tone: "blue" },
-  { slug: "old-school", label: "Old School", tone: "amber" },
+  { slug: "dicas-de-sistemas", label: "Dicas de Sistemas", tone: "amber" },
 ];
 
 export const materials: Material[] = [
@@ -283,7 +283,7 @@ export const materials: Material[] = [
         ],
       },
     ],
-    category: "old-school",
+    category: "dicas-de-sistemas",
     tags: ["OSR", "DCC", "Procedimentos"],
     readingTimeMinutes: 9,
     difficulty: "intermediario",

@@ -1,22 +1,21 @@
 "use server";
 
-import { newsletterSchema } from "@/lib/validation";
+import { participationSchema } from "@/lib/validation";
 
-export type NewsletterResult =
+export type ParticipationResult =
   | { ok: true }
   | { ok: false; error: string };
 
 /**
- * Inscreve um e-mail na newsletter.
+ * Registra intenção de participação.
  *
  * Integração futura (Supabase):
- *   await supabase.from("newsletter_subscribers").insert({
- *     name, email, source: "home", created_at: new Date().toISOString(),
+ *   await supabase.from("participation_requests").insert({
+ *     reason, source: "home", created_at: new Date().toISOString(),
  *   });
- * com unique constraint em `email` e dupla confirmação via e-mail.
  */
-export async function subscribeToNewsletter(input: unknown): Promise<NewsletterResult> {
-  const parsed = newsletterSchema.safeParse(input);
+export async function registerParticipationInterest(input: unknown): Promise<ParticipationResult> {
+  const parsed = participationSchema.safeParse(input);
 
   if (!parsed.success) {
     return { ok: false, error: "Revise os campos e tente novamente." };
@@ -29,7 +28,7 @@ export async function subscribeToNewsletter(input: unknown): Promise<NewsletterR
 
   // Simula a latência de persistência até o Supabase entrar.
   await new Promise((resolve) => setTimeout(resolve, 900));
-  console.info("[newsletter] novo inscrito:", parsed.data.email);
+  console.info("[participation] nova mensagem:", parsed.data.reason);
 
   return { ok: true };
 }

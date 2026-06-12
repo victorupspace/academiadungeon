@@ -9,7 +9,7 @@ import { getCommunityFeatures } from "@/lib/content";
 /**
  * Comunidade selada (prompt §16, v2): banda full-width com listra de
  * risco, carimbo "SELADA" em marca d'água e o índice de recursos
- * planejados em linhas técnicas. CTA ancorado na newsletter.
+ * planejados em linhas técnicas. CTA ancorado na seção "Faça parte".
  */
 export function CommunitySection() {
   const features = getCommunityFeatures();
@@ -60,7 +60,7 @@ export function CommunitySection() {
               </p>
 
               <div data-reveal className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <Button href="/#newsletter" size="lg">
+                <Button href="/#faca-parte" size="lg">
                   <Lock className="size-3.5" aria-hidden="true" />
                   Entrar na lista de espera
                 </Button>

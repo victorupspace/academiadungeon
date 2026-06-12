@@ -150,8 +150,8 @@ export default async function MaterialPage({ params }: PageProps) {
                 Anote uma cena, uma decisão e uma consequência que você pode levar para a próxima
                 aventura. O material rende mais quando vira procedimento.
               </p>
-              <Button href="/#newsletter" variant="secondary" className="mt-6 w-full">
-                Receber novos materiais
+              <Button href="/#faca-parte" variant="secondary" className="mt-6 w-full">
+                Pedir novos materiais
               </Button>
             </div>
           </aside>

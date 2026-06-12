@@ -46,7 +46,7 @@ export const footerColumns: { title: string; links: NavItem[] }[] = [
     links: [
       { label: "Sobre", href: "/sobre" },
       { label: "Comunidade", href: "/comunidade", soon: true },
-      { label: "Newsletter", href: "/#newsletter" },
+      { label: "Faça parte", href: "/#faca-parte" },
       { label: "Contato", href: "mailto:contato@academiadungeon.com.br" },
     ],
   },

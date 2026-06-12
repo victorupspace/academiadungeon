@@ -62,7 +62,7 @@ export function ComingSoon({
           <div data-reveal className="mt-10 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
             <Button href="/">Voltar ao salão principal</Button>
             {withNewsletterCta && (
-              <Button href="/#newsletter" variant="secondary">
+              <Button href="/#faca-parte" variant="secondary">
                 Ser avisado quando abrir
               </Button>
             )}

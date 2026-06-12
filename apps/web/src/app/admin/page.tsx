@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 /**
  * Placeholder do futuro backoffice (apps/admin): gestão de posts,
- * materiais, notícias, cursos, comunidade e newsletter — com os status
+ * materiais, notícias, cursos, comunidade e contatos — com os status
  * editoriais definidos em design.md §21.
  */
 export default function AdminPage() {
@@ -19,7 +19,7 @@ export default function AdminPage() {
       badgeTone="brand"
       eyebrow="Área do Mestre"
       title="O escritório do mestre está sendo mobiliado."
-      description="Aqui viverá o backoffice da Academia: publicação de materiais, notícias e cursos, gestão da comunidade e da newsletter. O acesso será liberado para a guilda editorial em breve."
+      description="Aqui viverá o backoffice da Academia: publicação de materiais, notícias e cursos, gestão da comunidade e dos contatos. O acesso será liberado para a guilda editorial em breve."
       withNewsletterCta={false}
     />
   );

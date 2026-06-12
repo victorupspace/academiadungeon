@@ -158,8 +158,8 @@ export default async function NoticiaPage({ params }: PageProps) {
                 Ao terminar, anote o que muda na sua preparação: uma ferramenta para testar, um
                 sistema para estudar ou uma conversa para abrir com o grupo.
               </p>
-              <Button href="/#newsletter" variant="secondary" className="mt-6 w-full">
-                Receber próximas crônicas
+              <Button href="/#faca-parte" variant="secondary" className="mt-6 w-full">
+                Sugerir próximos temas
               </Button>
             </div>
           </aside>

@@ -195,16 +195,16 @@ export default function MateriaisPage() {
                     Novos volumes entram em catalogacao continuamente.
                   </h2>
                   <p className="mt-2 max-w-2xl text-sm/6 text-text-secondary">
-                    A newsletter avisa quando a biblioteca receber novos guias, tabelas ou
-                    ferramentas prontas para mesa.
+                    Fale com a Academia para sugerir temas, pedir materiais ou abrir uma conversa
+                    sobre o que sua mesa precisa agora.
                   </p>
                 </div>
                 <Button
-                  href="/#newsletter"
+                  href="/#faca-parte"
                   variant="secondary"
                   className="shrink-0"
                 >
-                  Entrar na lista
+                  Entrar em contato
                 </Button>
               </div>
             </div>

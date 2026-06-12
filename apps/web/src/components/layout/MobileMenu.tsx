@@ -144,8 +144,8 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
       </nav>
 
       <div className="relative shrink-0 space-y-5 border-t border-border-strong px-container py-7" data-menu-item>
-        <Button href="/#newsletter" size="lg" className="w-full" onClick={onClose}>
-          Entrar na Academia
+        <Button href="/#faca-parte" size="lg" className="w-full" onClick={onClose}>
+          Entrar em Contato
         </Button>
         <ul className="flex items-center justify-center gap-6">
           {socialLinks.map((social) => (

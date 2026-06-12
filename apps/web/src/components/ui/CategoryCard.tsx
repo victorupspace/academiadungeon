@@ -61,18 +61,18 @@ export function CategoryCard({
         <span
           className={cn(
             "flex shrink-0 items-center justify-center border border-border-strong bg-bg-secondary",
-            featured ? "size-11" : "size-10",
+            "size-10",
             "text-text-primary transition-colors duration-200 group-hover:border-brand-accent group-hover:text-brand-ember"
           )}
           aria-hidden="true"
         >
-          <Icon className={featured ? "size-5" : "size-4.5"} strokeWidth={1.6} />
+          <Icon className="size-4.5" strokeWidth={1.6} />
         </span>
 
         <h3
           className={cn(
             "font-display font-black uppercase tracking-tight text-text-primary",
-            featured ? "text-2xl/tight sm:text-3xl/tight" : "text-xl/tight"
+            "text-xl/tight"
           )}
         >
           <Link

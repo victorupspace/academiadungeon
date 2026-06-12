@@ -102,8 +102,8 @@ export function Header() {
             </nav>
 
             <div className="flex items-center gap-3">
-              <Button href="/#newsletter" size="sm" className="hidden lg:inline-flex">
-                Entrar na Academia
+              <Button href="/#faca-parte" size="sm" className="hidden lg:inline-flex">
+                Entrar em Contato
               </Button>
               <button
                 ref={triggerButtonRef}

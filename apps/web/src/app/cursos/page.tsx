@@ -13,7 +13,7 @@ export default function CursosPage() {
     <ComingSoon
       eyebrow="Salão de treinamento"
       title="O salão de treinamento está sendo forjado."
-      description="Cursos estruturados com prática guiada, do fundamento à maestria — narrativa, preparação, improviso e construção de campanhas. As inscrições da primeira turma serão anunciadas pela newsletter."
+      description="Cursos estruturados com prática guiada, do fundamento à maestria — narrativa, preparação, improviso e construção de campanhas. Use a seção Faça parte para demonstrar interesse na primeira turma."
     />
   );
 }

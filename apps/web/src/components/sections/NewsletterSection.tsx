@@ -3,21 +3,20 @@ import { NewsletterForm } from "@/components/ui/NewsletterForm";
 import { Reveal } from "@/components/ui/Reveal";
 
 const PROMISES = [
-  "Um grimório por semana: guias, tabelas e achados da redação",
-  "Materiais novos antes de todo mundo, direto da forja",
-  "Zero spam — palavra de mestre; cancele com um clique",
+  "Conte o que você procura: materiais, parceria, comunidade, aulas ou projetos especiais.",
+  "A mensagem abre direto no WhatsApp da Academia, sem cadastro e sem captura escondida.",
+  "Respondemos por ordem de chegada com o próximo passo mais adequado para você.",
 ] as const;
 
 /**
- * Captura de e-mail (prompt §17, v2): painel chanfrado com canto de
- * acento. O id `newsletter` é a âncora dos CTAs "Entrar na Academia"
- * e da lista de espera da comunidade.
+ * Seção de contato "Faça parte": painel chanfrado com canto de acento.
+ * O id `faca-parte` é a âncora dos CTAs de contato e lista de espera.
  */
 export function NewsletterSection() {
   return (
     <section
-      id="newsletter"
-      aria-labelledby="newsletter-title"
+      id="faca-parte"
+      aria-labelledby="faca-parte-title"
       className="scroll-mt-header pb-section pt-section-sm"
     >
       <Container>
@@ -37,15 +36,20 @@ export function NewsletterSection() {
               <div className="relative grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-14">
                 <div>
                   <p className="eyebrow">
-                    <span className="text-brand-ember">{"// "}</span>AD_Newsletter
+                    <span className="text-brand-ember">{"// "}</span>AD_FacaParte
                   </p>
                   <h2
-                    id="newsletter-title"
+                    id="faca-parte-title"
                     className="mt-4 text-balance font-display text-display-lg font-black uppercase font-stretch-expanded text-text-primary"
                   >
-                    Grimórios, guias e notícias{" "}
-                    <span className="text-brand-secondary">direto da dungeon.</span>
+                    Faça parte da{" "}
+                    <span className="text-brand-secondary">Academia Dungeon.</span>
                   </h2>
+                  <p className="mt-5 max-w-xl text-pretty text-base/7 text-text-secondary">
+                    Quer conversar sobre materiais, comunidade, cursos, parcerias ou uma demanda
+                    específica para sua mesa? Envie uma mensagem direta e diga onde a Academia pode
+                    ajudar.
+                  </p>
                   <ul className="mt-8 space-y-0">
                     {PROMISES.map((promise, index) => (
                       <li
