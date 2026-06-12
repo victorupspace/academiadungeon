@@ -13,7 +13,7 @@ import { getMaterialCategories, getMaterialCategory, getPublishedMaterials } fro
 export const metadata: Metadata = {
   title: "Materiais",
   description:
-    "Biblioteca de materiais para mestres de RPG: checklists, tabelas, guias de preparação, narrativa, worldbuilding e ferramentas old school.",
+    "Biblioteca de materiais para mestres de RPG: checklists, tabelas, guias de preparação, narrativa, worldbuilding e ferramentas.",
   alternates: { canonical: "/materiais" },
 };
 

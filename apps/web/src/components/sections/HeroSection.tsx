@@ -84,7 +84,7 @@ export function HeroSection() {
     <section
       ref={scope}
       aria-labelledby="hero-title"
-      className="relative isolate overflow-hidden border-b border-border-strong pb-12 pt-[calc(var(--ad-header-height)+clamp(2rem,5vh,4rem))] sm:pb-16"
+      className="relative isolate overflow-hidden border-b border-border-strong pb-10 pt-[calc(var(--ad-header-height)+1rem)] sm:pb-16 sm:pt-[calc(var(--ad-header-height)+2rem)] lg:pt-[calc(var(--ad-header-height)+clamp(2rem,5vh,4rem))]"
     >
       <div aria-hidden="true" className="hero-dungeon-backdrop absolute inset-0 -z-20" />
       <div aria-hidden="true" className="dungeon-grid absolute inset-0 -z-10 opacity-70" />
@@ -96,7 +96,7 @@ export function HeroSection() {
       <Container className="relative">
         <div
           data-hero-copy
-          className="grid min-h-[clamp(34rem,70vh,46rem)] grid-cols-1 items-center gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(28rem,1.05fr)] lg:gap-12"
+          className="grid grid-cols-1 items-start gap-10 lg:min-h-[clamp(34rem,70vh,46rem)] lg:grid-cols-[minmax(0,0.8fr)_minmax(28rem,1.05fr)] lg:items-center lg:gap-12"
         >
           <div className="max-w-4xl">
             <div

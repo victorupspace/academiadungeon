@@ -1,39 +1,48 @@
 "use client";
 
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Menu } from "lucide-react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
 import { MobileMenu } from "@/components/layout/MobileMenu";
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/Button";
 import { Logo } from "@/components/ui/Logo";
 import { navigation } from "@/data/site";
-import { registerGsap } from "@/lib/animations";
 import { cn } from "@/lib/utils";
-
-registerGsap();
 
 /**
  * Header fixo (design.md §13): barra sólida com fio de acento no topo
- * e regra estrutural embaixo. Ao rolar, a regra inferior acende em
- * crimson — transição via ScrollTrigger + atributo `data-scrolled`.
+ * e regra estrutural embaixo. Ao rolar, a regra inferior acende em crimson.
  */
 export function Header() {
   const headerRef = useRef<HTMLElement>(null);
   const triggerButtonRef = useRef<HTMLButtonElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  useGSAP(() => {
+  useEffect(() => {
     const el = headerRef.current;
     if (!el) return;
-    ScrollTrigger.create({
-      start: 32,
-      end: "max",
-      onToggle: (self) => el.toggleAttribute("data-scrolled", self.isActive),
-    });
-  });
+
+    let frame = 0;
+
+    const syncScrolledState = () => {
+      frame = 0;
+      el.toggleAttribute("data-scrolled", window.scrollY > 32);
+    };
+
+    const onScroll = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(syncScrolledState);
+    };
+
+    syncScrolledState();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, []);
 
   const closeMenu = () => {
     setMenuOpen(false);
