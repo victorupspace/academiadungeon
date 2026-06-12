@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Music2, Pause, Play, Volume2, VolumeX } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { MEDIA_START_EVENT } from "@/lib/media";
@@ -23,7 +23,9 @@ function formatTime(seconds: number): string {
 }
 
 export function MusicPlayer() {
+  const playerRef = useRef<HTMLElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
+  const unlockOnGestureRef = useRef(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [volume, setVolume] = useState(DEFAULT_VOLUME);
@@ -39,6 +41,26 @@ export function MusicPlayer() {
     };
   }, []);
 
+  const playWithSound = useCallback(async () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    audio.volume = DEFAULT_VOLUME;
+    audio.muted = false;
+    unlockOnGestureRef.current = false;
+    setVolume(DEFAULT_VOLUME);
+    setMuted(false);
+    setNeedsGesture(false);
+
+    try {
+      await audio.play();
+    } catch {
+      setIsPlaying(false);
+      setNeedsGesture(true);
+      unlockOnGestureRef.current = true;
+    }
+  }, []);
+
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -48,25 +70,11 @@ export function MusicPlayer() {
   }, [muted, volume]);
 
   // O hero dispara MEDIA_START_EVENT depois da splash. Tentamos iniciar
-  // com som; se o browser bloquear autoplay audível, não tocamos mudo.
+  // com som; se o browser bloquear autoplay audível, armamos a primeira
+  // interação real da página para liberar a trilha sem trazer CTA na splash.
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
-
-    const playWithSound = async () => {
-      audio.volume = DEFAULT_VOLUME;
-      audio.muted = false;
-      setVolume(DEFAULT_VOLUME);
-      setMuted(false);
-      setNeedsGesture(false);
-
-      try {
-        await audio.play();
-      } catch {
-        setIsPlaying(false);
-        setNeedsGesture(true);
-      }
-    };
 
     const onMediaStart = () => {
       if (audio.paused) {
@@ -78,7 +86,54 @@ export function MusicPlayer() {
     return () => {
       window.removeEventListener(MEDIA_START_EVENT, onMediaStart);
     };
-  }, []);
+  }, [playWithSound]);
+
+  useEffect(() => {
+    const isInsidePlayer = (target: EventTarget | null) => {
+      return target instanceof Node && Boolean(playerRef.current?.contains(target));
+    };
+
+    const unlockFromPageGesture = (event: Event) => {
+      if (!unlockOnGestureRef.current || isInsidePlayer(event.target)) return;
+      void playWithSound();
+    };
+
+    const onPointerDown = (event: PointerEvent) => {
+      if (event.pointerType === "mouse") {
+        unlockFromPageGesture(event);
+      }
+    };
+
+    const onPointerUp = (event: PointerEvent) => {
+      if (event.pointerType !== "mouse") {
+        unlockFromPageGesture(event);
+      }
+    };
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (
+        event.defaultPrevented ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.altKey ||
+        (event.key !== "Enter" && event.key !== " ")
+      ) {
+        return;
+      }
+
+      unlockFromPageGesture(event);
+    };
+
+    window.addEventListener("pointerdown", onPointerDown, true);
+    window.addEventListener("pointerup", onPointerUp, true);
+    window.addEventListener("keydown", onKeyDown, true);
+
+    return () => {
+      window.removeEventListener("pointerdown", onPointerDown, true);
+      window.removeEventListener("pointerup", onPointerUp, true);
+      window.removeEventListener("keydown", onKeyDown, true);
+    };
+  }, [playWithSound]);
 
   const togglePlayback = async () => {
     const audio = audioRef.current;
@@ -92,12 +147,14 @@ export function MusicPlayer() {
     try {
       audio.volume = volume || DEFAULT_VOLUME;
       audio.muted = false;
+      unlockOnGestureRef.current = false;
       setMuted(false);
       setNeedsGesture(false);
       await audio.play();
     } catch {
       setIsPlaying(false);
       setNeedsGesture(true);
+      unlockOnGestureRef.current = true;
     }
   };
 
@@ -124,6 +181,7 @@ export function MusicPlayer() {
 
   return (
     <aside
+      ref={playerRef}
       aria-label="Player de música da Academia Dungeon"
       className={cn(
         "fixed inset-x-0 bottom-0 z-50 h-16 max-h-16 border-t-2 border-border-strong",
@@ -187,7 +245,7 @@ export function MusicPlayer() {
                   Trilha da dungeon
                 </p>
                 <p className="hidden truncate text-xs text-text-muted sm:block">
-                  {needsGesture ? "Aperte play para liberar som" : "Volume máximo"}
+                  {needsGesture ? "Clique na página para liberar som" : "Volume máximo"}
                 </p>
               </div>
             </div>
