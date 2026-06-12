@@ -340,7 +340,7 @@ export function SplashScreen() {
               </span>
             </span>
             <span className="block overflow-hidden">
-              <span data-splash-line className="block text-brand-ember">
+              <span data-splash-line className="block text-brand-accent">
                 Dungeon
               </span>
             </span>
