@@ -1,0 +1,13 @@
+{
+  "name": "@academia-dungeon/tokens",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Design tokens da Academia Dungeon — fonte única de verdade para cor, tipografia, espaçamento, radius, sombra e motion.",
+  "exports": {
+    ".": "./css/tokens.css",
+    "./tokens.css": "./css/tokens.css"
+  },
+  "files": [
+    "css"
+  ]
+}

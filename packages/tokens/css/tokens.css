@@ -1,0 +1,154 @@
+/* ============================================================
+   ACADEMIA DUNGEON — DESIGN TOKENS v2 (BRUTALISTA)
+   Fonte única de verdade. Base preto/cinza-escuro neutro com um
+   único acento: #A00024. Estrutura exposta, cantos retos, sombras
+   duras (offset). Documentação completa: docs/design.md
+   ============================================================ */
+
+:root {
+  /* ----------------------------------------------------------
+     COR / BASE — preto e cinza neutros (sem tons aquecidos)
+     ---------------------------------------------------------- */
+  --ad-color-bg-primary: #060607;
+  --ad-color-bg-secondary: #0a0a0c;
+  --ad-color-bg-tertiary: #101013;
+
+  --ad-color-surface-primary: #0e0e10;
+  --ad-color-surface-secondary: #141417;
+  --ad-color-surface-elevated: #1b1b1f;
+
+  /* ----------------------------------------------------------
+     COR / MARCA — crimson como acento único e deliberado
+     #A00024 em blobs, CTAs, marcas e estados ativos. Nunca como
+     fundo de seção ou cor dominante ("menos vermelho").
+     ---------------------------------------------------------- */
+  --ad-color-brand-accent: #a00024; /* O acento. */
+  --ad-color-brand-secondary: #c8102e; /* hover de CTA, display grande (≥3:1) */
+  --ad-color-brand-ember: #f23a56; /* única variante legível p/ texto pequeno (≥4.5:1) */
+  --ad-color-brand-primary: #5e0013; /* profundidade de blobs/gradientes */
+  --ad-color-marsala: #7a0a1f; /* tom médio de apoio (raro) */
+  --ad-color-blood: #a00024; /* alias do acento (blobs) */
+  --ad-color-wine-dark: #1c0309; /* fundo de blob profundo */
+
+  /* ----------------------------------------------------------
+     COR / TEXTO
+     ---------------------------------------------------------- */
+  --ad-color-text-primary: #f4f4f5;
+  --ad-color-text-secondary: #b6b6bc;
+  --ad-color-text-muted: #82828c;
+  --ad-color-text-inverse: #0a0a0c;
+
+  /* ----------------------------------------------------------
+     COR / BORDAS — estrutura exposta, regras visíveis
+     ---------------------------------------------------------- */
+  --ad-color-border-subtle: rgba(255, 255, 255, 0.14);
+  --ad-color-border-faint: rgba(255, 255, 255, 0.07);
+  --ad-color-border-strong: #2c2c32; /* a regra estrutural padrão */
+  --ad-color-border-brand: #a00024;
+  --ad-color-border-brand-soft: rgba(160, 0, 36, 0.45);
+
+  /* ----------------------------------------------------------
+     COR / NEON — exclusivamente status (dots, badges)
+     ---------------------------------------------------------- */
+  --ad-color-neon-green: #a7ff83;
+  --ad-color-neon-blue: #72e8ff;
+  --ad-color-neon-purple: #c084fc;
+  --ad-color-neon-amber: #ffd166;
+  --ad-color-neon-red: #ff4d6d;
+
+  /* ----------------------------------------------------------
+     COR / FEEDBACK E FOCO
+     ---------------------------------------------------------- */
+  --ad-color-success: #a7ff83;
+  --ad-color-error: #ff4d6d;
+  --ad-color-warning: #ffd166;
+  --ad-color-info: #72e8ff;
+  --ad-color-focus: #f23a56;
+
+  /* ----------------------------------------------------------
+     TIPOGRAFIA
+     Archivo (variável, eixo wdth) injetada como --font-archivo;
+     Space Mono como --font-space-mono (layout.tsx).
+     Display = Archivo Black expandida, caixa alta.
+     Mono = labels técnicos, meta, índices, eyebrows.
+     ---------------------------------------------------------- */
+  --ad-font-display: var(--font-archivo, "Archivo", "Helvetica Neue", sans-serif);
+  --ad-font-sans: var(--font-archivo, "Archivo", -apple-system, "Segoe UI", sans-serif);
+  --ad-font-mono: var(--font-space-mono, "Space Mono", "SFMono-Regular", monospace);
+
+  /* Escala display fluida — grande, densa, brutal */
+  --ad-text-display-2xl: clamp(3.1rem, 1.8rem + 6.5vw, 7.5rem);
+  --ad-text-display-xl: clamp(2.3rem, 1.65rem + 3.25vw, 4.6rem);
+  --ad-text-display-lg: clamp(1.85rem, 1.45rem + 2vw, 3.1rem);
+  --ad-text-display-md: clamp(1.4rem, 1.2rem + 1vw, 2rem);
+
+  --ad-tracking-eyebrow: 0.2em;
+  --ad-tracking-label: 0.1em;
+  --ad-tracking-display: -0.015em;
+
+  /* ----------------------------------------------------------
+     ESPAÇAMENTO
+     ---------------------------------------------------------- */
+  --ad-space-section: clamp(4.5rem, 3.5rem + 5vw, 8rem);
+  --ad-space-section-sm: clamp(3rem, 2.5rem + 2.5vw, 5rem);
+  --ad-space-container: clamp(1.25rem, 0.75rem + 2.5vw, 3rem);
+
+  /* ----------------------------------------------------------
+     RADIUS — brutalista: tudo reto. `full` existe apenas para
+     dots de status; pílulas e cantos arredondados são proibidos.
+     ---------------------------------------------------------- */
+  --ad-radius-xs: 0px;
+  --ad-radius-sm: 0px;
+  --ad-radius-md: 0px;
+  --ad-radius-lg: 0px;
+  --ad-radius-xl: 0px;
+  --ad-radius-2xl: 0px;
+  --ad-radius-full: 9999px;
+
+  /* ----------------------------------------------------------
+     SOMBRAS — duras (offset sólido), nunca glow difuso.
+     ---------------------------------------------------------- */
+  --ad-shadow-sm: none;
+  --ad-shadow-card: none;
+  --ad-shadow-elevated: 0 16px 40px rgba(0, 0, 0, 0.7);
+  --ad-shadow-hard: 4px 4px 0 0 #2c2c32;
+  --ad-shadow-hard-accent: 6px 6px 0 0 #a00024;
+  --ad-shadow-hard-accent-lg: 10px 10px 0 0 #a00024;
+  /* aliases legados (mapeiam para as sombras duras) */
+  --ad-shadow-glow-soft: var(--ad-shadow-hard);
+  --ad-shadow-glow-brand: var(--ad-shadow-hard-accent);
+  --ad-shadow-glow-portal: var(--ad-shadow-hard-accent-lg);
+
+  /* ----------------------------------------------------------
+     BORDAS (espessuras)
+     ---------------------------------------------------------- */
+  --ad-border-hairline: 1px;
+  --ad-border-thin: 1.5px;
+  --ad-border-thick: 2px;
+  --ad-border-heavy: 3px;
+
+  /* ----------------------------------------------------------
+     MOTION — curto e seco; o impacto vem da tipografia.
+     ---------------------------------------------------------- */
+  --ad-duration-fast: 100ms;
+  --ad-duration-base: 180ms;
+  --ad-duration-slow: 320ms;
+  --ad-duration-slower: 560ms;
+
+  --ad-ease-out: cubic-bezier(0.2, 0, 0, 1);
+  --ad-ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ad-ease-in-out: cubic-bezier(0.7, 0, 0.2, 1);
+
+  /* ----------------------------------------------------------
+     Z-INDEX
+     ---------------------------------------------------------- */
+  --ad-z-header: 40;
+  --ad-z-drawer: 50;
+  --ad-z-splash: 60;
+
+  /* ----------------------------------------------------------
+     LAYOUT
+     ---------------------------------------------------------- */
+  --ad-container-max: 80rem; /* 1280px */
+  --ad-header-height: 4.25rem; /* 68px */
+}

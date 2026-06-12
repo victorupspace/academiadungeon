@@ -1,0 +1,14 @@
+{
+  "name": "@academia-dungeon/config",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Configurações compartilhadas do monorepo: tsconfig, prettier.",
+  "exports": {
+    "./tsconfig/*": "./tsconfig/*",
+    "./prettier": "./prettier.config.mjs"
+  },
+  "files": [
+    "tsconfig",
+    "prettier.config.mjs"
+  ]
+}

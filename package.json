@@ -1,0 +1,17 @@
+{
+  "name": "academia-dungeon",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Hub digital premium para mestres de RPG — materiais, guias, notícias, cursos e comunidade.",
+  "packageManager": "pnpm@11.0.8",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @academia-dungeon/web dev",
+    "build": "pnpm --filter @academia-dungeon/web build",
+    "start": "pnpm --filter @academia-dungeon/web start",
+    "lint": "pnpm --filter @academia-dungeon/web lint",
+    "typecheck": "pnpm -r typecheck"
+  }
+}
